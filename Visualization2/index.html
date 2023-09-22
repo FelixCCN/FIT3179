@@ -1,11 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data visualisation</title>
-</head>
-<body>
-    
-</body>
-</html>
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 450,
+    "title": "Car accident",
+    "projection": {"type": "mercator",
+    "center": [145, -37.5],
+    "scale": 5000,
+    "translate": [400, 300]},
+
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/vic_localities.json",
+          "format": {"type": "topojson", "feature": "vic_localities"}
+        },
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
+          },
+          "mark": {"type": "point", "tooltip": {"content": "data"}},
+    "encoding": {
+            "longitude": {"field": "LONGITUDE", "type": "quantitative"},
+            "latitude": {"field": "LATITUDE", "type": "quantitative"},
+            "color": {
+    "condition": {"test": "datum.INJ_OR_FATAL === 1", "value": "green"},"value": "red"},
+    "tooltip": [
+      {"field": "LGA_NAME", "title": "Location"},
+      {"field": "INJ_OR_FATAL", "title": "Incident Count"}
+    ]   
+          }
+        }
+    ]
+  }
