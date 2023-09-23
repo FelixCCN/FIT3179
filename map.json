@@ -4,8 +4,8 @@
     "height": 450,
     "title": "Car accident in Victoria in 2019",
     "projection": {"type": "mercator",
-    "center": [145, -37.5],
-    "scale": 5000,
+    "center": [145.5, -37.5],
+    "scale": 4500,
     "translate": [400, 300]},
 
     "layer": [
