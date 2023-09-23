@@ -47,7 +47,7 @@
     "tooltip": [
       {"field": "LGA_NAME", "title": "Location"},
       {"field": "INJ_OR_FATAL", "title": "Incident Count"},
-      {"field":"ALCOHOL_RELATED"}
+      {"field":"ALCOHOL_RELATED", "title":"Is alcohol involved in the accident"}
     ]   
           }
         }
