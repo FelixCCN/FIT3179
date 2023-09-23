@@ -43,7 +43,7 @@
                             "domain": [2, 4, 6],
                             "range": [20,40,60,80]
                             } },
-                "shape": {"field":"ALCOHOL_RELATED", "type":"nominal" },
+                "shape": {"field":"ALCOHOL_RELATED", "type":"nominal", "title":"Is alcohol involved in the accident" },
     "tooltip": [
       {"field": "LGA_NAME", "title": "Location"},
       {"field": "INJ_OR_FATAL", "title": "Incident Count"},
