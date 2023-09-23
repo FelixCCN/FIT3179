@@ -1,0 +1,55 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 450,
+    "title": "Car accident in Victoria in 2019",
+    "projection": {"type": "mercator",
+    "center": [145, -37.5],
+    "scale": 5000,
+    "translate": [400, 300]},
+
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/vic_localities.json",
+          "format": {"type": "topojson", "feature": "vic_localities"}
+        },
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Book1.csv"
+          },
+          "mark": {"type": "point", "tooltip": {"content": "data"}},
+    "encoding": {
+            "longitude": {"field": "LONGITUDE", "type": "quantitative"},
+            "latitude": {"field": "LATITUDE", "type": "quantitative"},
+            
+            "color": {
+                "field": "INJ_OR_FATAL",
+                "type": "quantitative",
+                "title":"Number of injuries",
+                "scale": {
+                    "type": "threshold",
+                    "domain": [2, 4, 6],
+                    "range": ["#FBD290", "#FA9B00", "#EE0000", "#1E0000"]
+                    } },
+                "size": {
+                        "field": "INJ_OR_FATAL",
+                        "type": "quantitative",
+                        "title":"Number of injuries",
+                        "scale": {
+                            "type": "threshold",
+                            "domain": [2, 4, 6],
+                            "range": [20,40,60,80]
+                            } },
+                "shape": {"field":"ALCOHOL_RELATED", "type":"nominal" },
+    "tooltip": [
+      {"field": "LGA_NAME", "title": "Location"},
+      {"field": "INJ_OR_FATAL", "title": "Incident Count"},
+      {"field":"ALCOHOL_RELATED"}
+    ]   
+          }
+        }
+    ]
+  }
