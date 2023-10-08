@@ -1,0 +1,48 @@
+{
+"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+"width": 500,
+"height": 400,
+"title": "Number of accident in each location",
+
+"layer": [
+      {
+      "data": {
+            "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Book2.csv"
+          }, 
+          "transform": [{
+            "aggregate": [{
+              "op": "count",
+              "field": "ALCOHOLTIME",
+              "as": "Total"
+            }],
+            "groupby": ["LGA_NAME"]
+          },
+          {"filter":"datum.Total>100"}],
+        "selection": {
+        "location_highlight": {
+        "type": "multi",
+        "fields": ["LGA_NAME"],
+        "bind": "legend"
+        }
+        },
+              
+
+        "mark" :{"type" : "bar"},
+        "encoding": {
+        "y":{"field":"Total", "type" : "quantitative", "title":"Number of accidents"},
+        "x":{"field":"LGA_NAME", "type":"nominal", "title" :"Location","sort":"-y"},
+        "color":{"field":"LGA_NAME", "type": "nominal", "title":"location","sort":"y","scale":{"scheme": "yelloworangered"}},
+        "opacity": {
+            "condition": {"selection": "location_highlight", "value": 1},
+            "value": 0.1
+            },   
+        "tooltip":[
+            {"field":"LGA_NAME", "type":"nominal","title":"Location"},
+            {"field":"Total","type":"quantitative"}
+        ]}
+        
+        
+        }
+        
+        ]
+}
