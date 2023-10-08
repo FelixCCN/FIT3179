@@ -1,6 +1,6 @@
 {
 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-"width": 500,
+"width": 400,
 "height": 400,
 "title": "Number of accident in each location",
 
@@ -12,11 +12,22 @@
           "transform": [{
             "aggregate": [{
               "op": "count",
-              "field": "ALCOHOLTIME",
+              "field": "TOTAL_PERSONS",
               "as": "Total"
-            }],
+            },
+        {
+            "op":"sum",
+            "field": "FATALITY",
+            "as":"Person"
+        },
+        {
+            "op":"sum",
+            "field": "INJ_OR_FATAL",
+            "as":"inj"
+        }],
             "groupby": ["LGA_NAME"]
           },
+
           {"filter":"datum.Total>100"}],
         "selection": {
         "location_highlight": {
@@ -27,18 +38,39 @@
         },
               
 
-        "mark" :{"type" : "bar"},
+        "mark" :{"type" : "circle"},
         "encoding": {
-        "y":{"field":"Total", "type" : "quantitative", "title":"Number of accidents"},
-        "x":{"field":"LGA_NAME", "type":"nominal", "title" :"Location","sort":"-y"},
-        "color":{"field":"LGA_NAME", "type": "nominal", "title":"location","sort":"y","scale":{"scheme": "yelloworangered"}},
+
+        "y":{"field":"Total", 
+            "type" : "quantitative", 
+            "title":"Number of accidents"},
+
+        "x":{"field":"inj", 
+            "type":"quantitative", 
+            "title" :"Number of people involved",
+            "sort":"y",
+            "axis":{"tickCount":5}},
+
+        "size":{"field":"Person",
+            "type": "quantitative",
+            "title":"Number of death"},
+
+        "color":{"field":"LGA_NAME", 
+            "type": "nominal", 
+            "title":"Location",
+            "sort":"y",
+            "scale":{"scheme": "yelloworangered"}},
+
         "opacity": {
-            "condition": {"selection": "location_highlight", "value": 1},
+            "condition": {"selection": "location_highlight", "value": 0.7},
             "value": 0.1
             },   
+
         "tooltip":[
             {"field":"LGA_NAME", "type":"nominal","title":"Location"},
-            {"field":"Total","type":"quantitative"}
+            {"field":"Total","type":"quantitative","title":"Number of accidents"},
+            {"field":"Person","type": "quantitative", "title":"Number of death"},
+            {"field":"inj","type": "quantitative","title":"NUmber of people involved"}
         ]}
         
         
