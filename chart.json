@@ -1,6 +1,6 @@
 {
 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-"width": 500,
+"width": 400,
 "height": 400,
 "title": "Number of accident in each location",
 
@@ -29,15 +29,21 @@
           },
 
           {"filter":"datum.Total>100"}],
+
         "selection": {
         "location_highlight": {
         "type": "multi",
         "fields": ["LGA_NAME"],
         "bind": "legend"
-        }
         },
-              
+        "death_highlight": {
+            "type": "multi",
+            "fields": ["Person"],
+            "bind": "legend"
+            }
+          },
 
+       
         "mark" :{"type" : "circle"},
         "encoding": {
 
@@ -53,7 +59,12 @@
 
         "size":{"field":"Person",
             "type": "quantitative",
-            "title":"Number of death"},
+            "title":"Number of death",
+            "scale": {
+                "type": "threshold",
+                "domain": [2, 4, 6, 8, 10],
+                "range": [10, 50, 150, 200, 300, 400]
+                }},
 
         "color":{"field":"LGA_NAME", 
             "type": "nominal", 
