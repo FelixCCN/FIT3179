@@ -8,16 +8,28 @@
     "scale": {"expr": "zoom_level"},
     "translate": [400, 300]},
     "params":[
-      {
+           {
+        "name": "Year_selection",
+        "value": 2017,
+        "bind": {
+        "input": "range",
+        "min": 2015,
+        "max": 2019,
+        "step": 1,
+        "name": "Year: "
+        }}, 
+
+        {
       "name": "month_selection",
       "value": 1,
       "bind": {
       "input": "range",
       "min": 1,
-      "max": 6,
+      "max": 9,
       "step": 1,
       "name": "Month: "
       }},
+
       {
         "name": "zoom_level",
         "value": 30000,
@@ -54,9 +66,10 @@
         },
         {
           "data": {
-            "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Book1.csv"
+            "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
           },
-          "transform": [{"filter":"slice(datum.ACCIDENT_DATE,6,7) == month_selection"}],
+          "transform": [{"filter":"slice(datum.ACCIDENT_DATE,6,7) == month_selection"},
+          {"filter":"slice(datum.ACCIDENT_DATE,0,4) == Year_selection"}],
           "mark": {"type": "point", "tooltip": {"content": "data"}},
     "encoding": {
             "longitude": {"field": "LONGITUDE", "type": "quantitative"},
