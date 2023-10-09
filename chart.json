@@ -4,10 +4,32 @@
 "height": 500,
 "title": "Number of accident in each location",
 
+"params":[
+    {
+ "name": "acci_selection",
+ "value": 500,
+ "bind": {
+ "input": "range",
+ "min": 100,
+ "max": 3000,
+ "step": 100,
+ "name": "Number of accidents between: "
+ }},
+ {
+    "name": "acci_upper_selection",
+    "value": 3170,
+    "bind": {
+    "input": "range",
+    "min": 100,
+    "max": 3170,
+    "step": 100,
+    "name": "and: "
+    }}],
+
 "layer": [
       {
       "data": {
-            "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Book2.csv"
+            "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
           }, 
           "transform": [{
             "aggregate": [{
@@ -28,7 +50,8 @@
             "groupby": ["LGA_NAME"]
           },
 
-          {"filter":"datum.Total>100"}],
+          {"filter":"datum.Total> acci_selection"},
+          {"filter":"datum.Total< acci_upper_selection"}],
 
         "selection": {
         "location_highlight": {
@@ -63,7 +86,7 @@
             "title":"Number of death",
             "scale": {
                 "type": "threshold",
-                "domain": [2, 4, 6, 8, 10],
+                "domain": [5, 10, 20, 30, 40],
                 "range": [30, 150, 450, 600, 900, 1200]
                 }},
 
