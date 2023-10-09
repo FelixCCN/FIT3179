@@ -4,22 +4,59 @@
     "height": 460,
     "title": "Car accident in Victoria in 2019",
     "projection": {"type": "mercator",
-    "center": [145.5, -37.5],
-    "scale": 4500,
+    "center": {"expr": "center_to"},
+    "scale": {"expr": "zoom_level"},
     "translate": [400, 300]},
-
+    "params":[
+      {
+      "name": "month_selection",
+      "value": 1,
+      "bind": {
+      "input": "range",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "name": "Month: "
+      }},
+      {
+        "name": "zoom_level",
+        "value": 30000,
+        "bind": {
+        "input": "range",
+        "min": 3500,
+        "max": 60000,
+        "step": 100,
+        "name": "Zoom: "
+        }
+        },
+      {
+        "name": "center_to",
+        "value": [145, -37.95],
+        "bind": {
+        "input": "select",
+        "options": [
+        [145, -37.85],
+        [144.3, -38.1]
+        ],
+        "labels": ["Melbourne CBD", "Geelong"],
+        "name": "Map Centre: "
+        }}],
+      
     "layer": [
       {
         "data": {
           "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/vic_localities.json",
           "format": {"type": "topojson", "feature": "vic_localities"}
         },
+        
+        
         "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
         },
         {
           "data": {
             "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Book1.csv"
           },
+          "transform": [{"filter":"slice(datum.ACCIDENT_DATE,6,7) == month_selection"}],
           "mark": {"type": "point", "tooltip": {"content": "data"}},
     "encoding": {
             "longitude": {"field": "LONGITUDE", "type": "quantitative"},
