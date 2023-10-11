@@ -21,7 +21,7 @@
     "bind": {
     "input": "range",
     "min": 100,
-    "max": 3170,
+    "max": 3200,
     "step": 100,
     "name": "and: "
     }}],
