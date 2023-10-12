@@ -82,7 +82,7 @@
                 "scale": {
                     "type": "threshold",
                     "domain": [2, 4, 6],
-                    "range": ["#FBD290", "#FA9B00", "#EE0000", "#1E0000"]
+                    "range": ["#ABDE57", "#FA9B00", "#EE0000", "#1E0000"]
                     } },
                 "opacity": {"value": 0.5},
                 "size": {
