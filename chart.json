@@ -1,115 +1,137 @@
 {
-"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-"width": 600,
-"height": 500,
-"title": "Number of accident in each location",
-
-"params":[
-    {
- "name": "acci_selection",
- "value": 500,
- "bind": {
- "input": "range",
- "min": 100,
- "max": 3000,
- "step": 100,
- "name": "Number of accidents between: "
- }},
- {
-    "name": "acci_upper_selection",
-    "value": 3170,
-    "bind": {
-    "input": "range",
-    "min": 100,
-    "max": 3200,
-    "step": 100,
-    "name": "and: "
-    }}],
-
-"layer": [
-      {
-      "data": {
-            "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
-          }, 
-          "transform": [{
-            "aggregate": [{
-              "op": "count",
-              "field": "TOTAL_PERSONS",
-              "as": "Total"
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 500,
+    "title": "Number of accident in each location",
+    
+    "params":[
+        {
+     "name": "acci_selection",
+     "value": 500,
+     "bind": {
+     "input": "range",
+     "min": 100,
+     "max": 3000,
+     "step": 100,
+     "name": "Number of accidents between: "
+     }},
+     {
+        "name": "acci_upper_selection",
+        "value": 3170,
+        "bind": {
+        "input": "range",
+        "min": 100,
+        "max": 3200,
+        "step": 100,
+        "name": "and: "
+        }}],
+    
+    "layer": [
+          {
+          "data": {
+                "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
+              }, 
+              "transform": [{
+                "aggregate": [{
+                  "op": "count",
+                  "field": "TOTAL_PERSONS",
+                  "as": "Total"
+                },
+            {
+                "op":"sum",
+                "field": "FATALITY",
+                "as":"Person"
             },
-        {
-            "op":"sum",
-            "field": "FATALITY",
-            "as":"Person"
-        },
-        {
-            "op":"sum",
-            "field": "INJ_OR_FATAL",
-            "as":"inj"
-        }],
-            "groupby": ["LGA_NAME"]
-          },
-
-          {"filter":"datum.Total> acci_selection"},
-          {"filter":"datum.Total< acci_upper_selection"}],
-
-        "selection": {
-        "location_highlight": {
-        "type": "multi",
-        "fields": ["LGA_NAME"],
-        "bind": "legend"
-        },
-        "death_highlight": {
+            {
+                "op":"sum",
+                "field": "INJ_OR_FATAL",
+                "as":"inj"
+            }],
+                "groupby": ["LGA_NAME"]
+              },
+    
+              {"filter":"datum.Total> acci_selection"},
+              {"filter":"datum.Total< acci_upper_selection"}],
+    
+            "selection": {
+            "location_highlight": {
             "type": "multi",
-            "fields": ["Person"],
+            "fields": ["LGA_NAME"],
             "bind": "legend"
-            }
-          },
-
-       
-        "mark" :{"type" : "circle"},
-        "encoding": {
-
-        "y":{"field":"Total", 
-            "type" : "quantitative", 
-            "title":"Number of accidents",
-            "axis":{"tickCount":7}},
-
-        "x":{"field":"inj", 
-            "type":"quantitative", 
-            "title" :"Number of people involved",
-            "sort":"y",
-            "axis":{"tickCount":5}},
-
-        "size":{"field":"Person",
-            "type": "quantitative",
-            "title":"Number of death",
-            "scale": {
-                "type": "threshold",
-                "domain": [5, 10, 20, 30, 40],
-                "range": [30, 150, 450, 600, 900, 1200]
-                }},
-
-        "color":{"field":"LGA_NAME", 
-            "type": "nominal", 
-            "title":"Location",
-            "sort":"y",
-            "scale":{"scheme": "yelloworangered"}},
-
-        "opacity": {
-            "condition": {"selection": "location_highlight", "value": 0.7},
-            "value": 0.1
-            },   
-
-        "tooltip":[
-            {"field":"LGA_NAME", "type":"nominal","title":"Location"},
-            {"field":"Total","type":"quantitative","title":"Number of accidents"},
-            {"field":"Person","type": "quantitative", "title":"Number of death"},
-            {"field":"inj","type": "quantitative","title":"NUmber of people involved"}
-        ]}
-        
-        
-        }
-        
-        ]
-}
+            },
+            "death_highlight": {
+                "type": "multi",
+                "fields": ["Person"],
+                "bind": "legend"
+                }
+              },
+    
+           
+            "mark" :{"type" : "circle"},
+            "encoding": {
+    
+            "y":{"field":"Total", 
+                "type" : "quantitative", 
+                "title":"Number of accidents",
+                "axis":{"tickCount":7}}
+            ,
+    
+            "x":{"field":"inj", 
+                "type":"quantitative", 
+                "title" :"Number of people involved",
+                "sort":"y",
+                "axis":{"tickCount":5, "grid": false}},
+    
+            "size":{"field":"Person",
+                "type": "quantitative",
+                "title":"Number of death",
+                "scale": {
+                    "type": "threshold",
+                    "domain": [5, 10, 20, 30, 40],
+                    "range": [30, 150, 450, 600, 900, 1200]
+                    }},
+    
+            "color":{"field":"LGA_NAME", 
+                "type": "nominal", 
+                "title":"Location",
+                "sort":"y",
+                "scale":{"scheme": "yelloworangered"}
+            },
+    
+            "opacity": {
+                "condition": {"selection": "location_highlight", "value": 0.7},
+                "value": 0.1
+                },   
+    
+            "tooltip":[
+                {"field":"LGA_NAME", "type":"nominal","title":"Location"},
+                {"field":"Total","type":"quantitative","title":"Number of accidents"},
+                {"field":"Person","type": "quantitative", "title":"Number of death"},
+                {"field":"inj","type": "quantitative","title":"NUmber of people involved"}
+            ]}
+            
+            
+            },
+            {
+                "mark": {
+                "type": "text",
+                "align": "right",
+                "baseline": "middle",
+                "dx": -12,
+                "fontSize": 11.5,
+                "fontStyle": "italic"
+                },
+                "encoding": {
+                "text": {"field": "Country", "type": "nominal"},
+                "color": {"value": "black"},
+                "opacity": {
+                "condition": {
+                "test": "datum['LGA_NAME'] == 'MELBOURNE' || datum['LGA_NAME'] == 'CASEY' || datum['LGA_NAME'] == 'GEELONG'",
+                "value": 1
+                },
+                "value": 0
+                }}}
+            
+            ]
+    }
+    
