@@ -1,0 +1,30 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 500,
+    "title": "Number of accident in each location",
+
+    
+    "data":{
+        "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
+      },
+
+      "mark": "area",
+      "encoding": {
+        "x": {
+          "timeUnit": "yearmonth", "field": "ACCIDENT_DATE",
+          "axis": {"format": "%Y%M", "grid":false},
+          "title":"Year"
+    
+        },
+        "y": {
+          "aggregate": "count", "field": "ALCOHOLTIME"
+        },
+        "color": {
+          "field": "SPEED_ZONE",
+          "scale": {"scheme": "category20b"}
+        }
+
+      }
+
+}
