@@ -26,8 +26,7 @@
         "name": "and: "
         }}],
     
-    "layer": [
-          {
+
           "data": {
                 "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
               }, 
@@ -65,12 +64,8 @@
                 "bind": "legend"
                 }
               },
-    
-           
-            "mark" :{"type" : "circle"},
-            "encoding": {
-    
-            "y":{"field":"Total", 
+    "encoding": {
+    "y":{"field":"Total", 
                 "type" : "quantitative", 
                 "title":"Number of accidents",
                 "axis":{"tickCount":7}}
@@ -80,8 +75,12 @@
                 "type":"quantitative", 
                 "title" :"Number of people involved",
                 "sort":"y",
-                "axis":{"tickCount":5, "grid": false}},
-    
+                "axis":{"tickCount":5, "grid": false}}},
+    "layer": [
+          {           
+            "mark" :{"type" : "circle"},
+            
+        "encoding": {
             "size":{"field":"Person",
                 "type": "quantitative",
                 "title":"Number of death",
@@ -91,38 +90,34 @@
                     "range": [30, 150, 450, 600, 900, 1200]
                     }},
     
-            "color":{"field":"LGA_NAME", 
-                "type": "nominal", 
-                "title":"Location",
-                "sort":"y",
-                "scale":{"scheme": "yelloworangered"}
+            "color":{
+                "condition":[{ "test":"datum['LGA_NAME'] == 'MELBOURNE'","value": "#FF9300"},
+                {"test":"datum['LGA_NAME'] == 'CASEY'","value":"#F6BA32"},
+                {"test":"datum['LGA_NAME'] == 'GEELONG'","value":"#F5CC67"}
+            ],
+                "value":"grey"
             },
-    
-            "opacity": {
-                "condition": {"selection": "location_highlight", "value": 0.7},
-                "value": 0.1
-                },   
+        
     
             "tooltip":[
                 {"field":"LGA_NAME", "type":"nominal","title":"Location"},
                 {"field":"Total","type":"quantitative","title":"Number of accidents"},
                 {"field":"Person","type": "quantitative", "title":"Number of death"},
                 {"field":"inj","type": "quantitative","title":"NUmber of people involved"}
-            ]}
-            
-            
-            },
+            ]}}
+            ,
             {
                 "mark": {
                 "type": "text",
                 "align": "right",
                 "baseline": "middle",
-                "dx": -12,
+                "dx": -18,
+                "dy":-10,
                 "fontSize": 11.5,
                 "fontStyle": "italic"
                 },
                 "encoding": {
-                "text": {"field": "Country", "type": "nominal"},
+                "text": {"field": "LGA_NAME", "type": "nominal"},
                 "color": {"value": "black"},
                 "opacity": {
                 "condition": {
@@ -130,7 +125,15 @@
                 "value": 1
                 },
                 "value": 0
-                }}}
+                },
+                "tooltip":[
+                    {"field":"LGA_NAME", "type":"nominal","title":"Location"},
+                    {"field":"Total","type":"quantitative","title":"Number of accidents"},
+                    {"field":"Person","type": "quantitative", "title":"Number of death"},
+                    {"field":"inj","type": "quantitative","title":"NUmber of people involved"}
+                ]
+            }
+        }
             
             ]
     }
