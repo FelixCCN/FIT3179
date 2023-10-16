@@ -1,0 +1,48 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 200,
+    "height": 200,
+    "title": "Ratio of drunk driving",
+
+
+  
+    "data": {
+        "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
+      }, 
+      "transform": [{
+        "aggregate": [{
+          "op": "count",
+          "field": "TOTAL_PERSONS",
+          "as": "Total"
+        }  
+    ],
+    "groupby": ["ALCOHOL_RELATED"]
+  },
+  {
+    "calculate": "datum.Total/60689 * 100",
+    "as": "Percentage"
+    }]
+  ,
+  "encoding": {
+    "theta": {"field": "Percentage", "type": "quantitative", "stack": true},
+    "color":{
+        "condition":{ "test":"datum['ALCOHOL_RELATED'] == 'Yes' ","value": "#EE0000"},
+        "value":"#F4CD6B"
+    },
+    "tooltip":[{"field":"ALCOHOL_RELATED","type":"nominal"},
+    {"field":"Percentage","type": "quantitative","format":".2f"}]
+  }
+  ,
+  "layer": [{
+    "mark": {"type": "arc", "outerRadius": 80, "innerRadius":40}
+  }, {
+    "mark": {"type": "text", "radius": 90},
+    "encoding": {
+      "text": {"field": "ALCOHOL_RELATED", "type": "nominal"}
+    }
+  } 
+]
+
+
+
+}
