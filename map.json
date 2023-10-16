@@ -82,7 +82,7 @@
                 "scale": {
                     "type": "threshold",
                     "domain": [2, 4, 6],
-                    "range": ["#ABDE57", "#FA9B00", "#EE0000", "#1E0000"]
+                    "range": ["#DACDAD   ", "#FA9B00", "#EE0000", "#1E0000"]
                     } },
                 "opacity": {"value": 0.5},
                 "size": {
@@ -92,7 +92,7 @@
                         "scale": {
                             "type": "threshold",
                             "domain": [2, 4, 6],
-                            "range": [20,40,60,80]
+                            "range": [20,60,100,200]
                             } },
                 "shape": {"field":"ALCOHOL_RELATED", "type":"nominal" , "title":"Is alcohol involved in the accident"},
     "tooltip": [
