@@ -1,10 +1,14 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 200,
+    "width": 300,
     "height": 200,
-    "title": "Ratio of drunk driving",
+    "title": "Is the accident DUI related",
 
-
+    "config": {
+        "view": {
+           "stroke": "transparent"
+        }
+      },
   
     "data": {
         "url": "https://raw.githubusercontent.com/FelixCCN/FIT3179/main/Visualization2/Road_Crashes_for_five_Years_Victoria_modify.csv"
@@ -29,7 +33,7 @@
         "condition":{ "test":"datum['ALCOHOL_RELATED'] == 'Yes' ","value": "#EE0000"},
         "value":"#F4CD6B"
     },
-    "tooltip":[{"field":"ALCOHOL_RELATED","type":"nominal"},
+    "tooltip":[{"field":"ALCOHOL_RELATED","type":"nominal","title":"DUI related"},
     {"field":"Percentage","type": "quantitative","format":".2f"}]
   }
   ,
@@ -39,6 +43,7 @@
     "mark": {"type": "text", "radius": 90},
     "encoding": {
       "text": {"field": "ALCOHOL_RELATED", "type": "nominal"}
+    
     }
   } 
 ]
