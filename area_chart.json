@@ -29,7 +29,7 @@
         },
         "color": {
           "field": "SPEED_ZONE",
-          "title":"Speed Zone",
+          "title":"Speed Zone (ranked)",
           "scale": {"scheme": "yelloworangered", "reverse":true}
         },
 
