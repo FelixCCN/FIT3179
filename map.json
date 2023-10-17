@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 810,
+    "width": 900,
     "height": 460,
     "title": "Car accident in Victoria in 2019",
     "projection": {"type": "mercator",
