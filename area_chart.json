@@ -22,7 +22,7 @@
         },
         "color": {
           "field": "SPEED_ZONE",
-          "scale": {"scheme": "category20b"}
+          "scale": {"scheme": "yelloworangered"}
         }
 
       }
